@@ -1,0 +1,42 @@
+{% extends "portfolio/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="row justify-content-center my-3">
+  <div class="col-5">
+    <img src="{% static 'portfolio/myphoto3.jpeg' %}" class="img-fluid">
+  </div>
+</div>
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-9 text-center">
+    <h1 class="font-weight-bold">Stepan Poleshchuk. I live in Saint-Petersburg. I'm jogging and learning to code.</h1>
+  </div>
+</div>
+
+<h2 class="mt-5">Portfolio</h2>
+<hr>
+<div class="row">
+  <!-- делаем цикл по проектам, переменная projects содержит все объекты класса Project -->
+  {% for project in projects %}
+  <div class="col-lg-4 col-md-6">
+    <!-- проверяем указана ли ссылка внутри нашей БД, если указана - выводим -->
+    <!-- выводим каждый атрибут каждого объекта в цикле -->
+    {% if project.url %}
+    <a href="{{ project.url }}">
+      <img src="{{ project.image.url }}" class="img-fluid mb-2">
+    </a>
+    {% else %}
+
+    <img src="{{ project.image.url }}" class="img-fluid mb-2">
+    {% endif %}
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
